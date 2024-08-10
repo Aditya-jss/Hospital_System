@@ -1,35 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Admin Dashboard</title>
-<!-- Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-<!-- Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<!-- Custom CSS (if any) -->
+<meta charset="ISO-8859-1">
+<title>Insert  </title>
 <%@include file="../component/allcss.jsp" %>
-<style>
-.paint-card {
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+<style type="text/css">
+.paint-card{
+box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.3);
 }
 </style>
 </head>
 <body>
 <%@include file="navbar.jsp" %>
-<div class="container p-5">
-    <p class="text-center fs-3">Admin Dashboard</p>
-    <c:if test="${not empty succMsg}">
-        <p class="text-center text-success fs-3">${succMsg}</p>
-        <c:remove var="succMsg" scope="session"/> 
-    </c:if>
-    <c:if test="${not empty errorMsg}">
-        <p class="text-center text-danger fs-3">${errorMsg}</p>
-        <c:remove var="errorMsg" scope="session"/> 
-    </c:if>
 
-    <div class="row">
+<c:if test="${ empty adminObj }">
+    <c:redirect url="../admin_login.jsp"></c:redirect>
+</c:if>
+<div class="container p-5">
+<p class="text-center fs-3">Admin Dashboard</p>
+<c:if test="${not empty succMsg }">
+                    <p class="text-center text-success fs-3">${succMsg }</p>
+                    <c:remove var="succMsg" scope="session"/>
+                    </c:if>
+                    
+                    <c:if test="${not empty errorMsg }">
+                    <p class="text-center text-danger fs-3">${errorMsg }</p>
+                    <c:remove var="errorMsg" scope="session"/>
+                    </c:if>
+ <div class="row">
         <div class="col-md-4">
             <div class="card paint-card">
                 <div class="card-body text-center text-success">
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="col-md-4 mt-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <div class="card paint-card">
                 <div class="card-body text-center text-success">
                     <i class="fas fa-calendar-check fa-3x"></i><br>
@@ -62,13 +62,37 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
+    <!-- Button trigger modal -->
 
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <!-- Custom JS (if any) -->
-    <script src="path_to_your_custom_js.js"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="../addSpecialist" method="post">
+        
+        <div class="form-group">
+        <label>Enter Specialist Name</label>
+        <input type="text" name="specName" class="form-control">
+        </div>
+        <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
+    
 </body>
 </html>

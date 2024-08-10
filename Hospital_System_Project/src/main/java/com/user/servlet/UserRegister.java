@@ -14,9 +14,10 @@ import com.entity.User;
 @WebServlet("/user_register")
 public class UserRegister extends HttpServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		try {
             String fullName = req.getParameter("fullname");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
@@ -28,16 +29,26 @@ public class UserRegister extends HttpServlet {
             boolean f = dao.register(u);
 
             if (f) {
-                session.setAttribute("succMsg", "Register Successfully");
+            	session.setAttribute("succMsg", "Register Successfully");
                 resp.sendRedirect("signup.jsp");
 
+
             } else {
-                session.setAttribute("errorMsg", "something wrong on server");
+            	session.setAttribute("errorMsg", "something wrong on server");
                 resp.sendRedirect("signup.jsp");
+
+
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-}
+
+		
+		
+	}
+	
+	
+	
+
