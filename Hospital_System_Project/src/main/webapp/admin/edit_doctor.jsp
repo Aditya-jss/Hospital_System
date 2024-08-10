@@ -29,35 +29,43 @@ box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.3);
                     <c:remove var="succMsg" scope="session"/>
                     </c:if>
                     
+                    
+                    
                     <c:if test="${not empty errorMsg }">
                     <p class="text-center text-danger fs-3">${errorMsg }</p>
                     <c:remove var="errorMsg" scope="session"/>
                     </c:if>
                     
+                    <%
+                    int id=Integer.parseInt(request.getParameter("id"));
+                    DoctorDao dao2=new DoctorDao(DBConnect.getConn());
+                    Doctor d=dao2.getDoctorById(id);
                     
-                    <form action="../addDoctor" method="post">
+                    %>
+                    
+                    <form action="../updateDoctor" method="post">
                     <div class="mb-3">
                       <label class="form-label">Full Name</label><input type="text"
-                      required name="fullname" class="form-control">
+                      required name="fullname" class="form-control" value="<%=d.getFullName()%>">
                      
                     </div>
                     
                     <div class="mb-3">
                     <label class="form-label">DOB</label><input type="date"
-                    required name="dob" class="form-control">
+                    required value="<%=d.getDob()%>" name="dob" class="form-control" value="<%=d.getDob()%>">
                     </div>
                     
                     
                     <div class="mb-3">
                     <label class="form-label">QUALIFICATION</label><input 
-                    required name="qualification" type="text" class="form-control">
+                    required value="<%=d.getQualification()%>" name="qualification" type="text" class="form-control">
                     </div>
                     
                     
                     <div class="mb-3">
                     <label class="form-label">Specialist</label><select name="spec"
                     required class="form-control">
-                    <option>--select--</option>
+                    <option><%=d.getSpecialist()%></option>
                     
                     
                     <%SpecialistDao dao= new SpecialistDao(DBConnect.getConn());
@@ -75,19 +83,20 @@ box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.3);
                     
                      <div class="mb-3">
                     <label class="form-label">Email</label><input type="text"
-                    required name="email" type="text" class="form-control">
+                    required name="email" type="text" class="form-control" value="<%=d.getEmail()%>">
                     </div>
                     
                      <div class="mb-3">
                     <label class="form-label">Mobile Number</label><input type="text"
-                    required name="mobno" type="text" class="form-control">
+                    required name="mobno" type="text" class="form-control" value="<%=d.getMobNo()%>">
                     </div>
                     
                     <div class="mb-3">
                     <label class="form-label">Password</label><input 
-                    required name="password" type="password" class="form-control">
+                    required name="password" type="text" class="form-control" value="<%=d.getPassword()%>">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+					<input type="hidden" name="id" value="<%= d.getId() %>">
+                    <button type="submit" class="btn btn-primary col-md-12">Update</button>
                     </form>
       </div>
      

@@ -12,9 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.dao.DoctorDao;
 import com.db.DBConnect;
 import com.entity.Doctor;
-@WebServlet("/addDoctor")
-
-public class AddDoctor extends HttpServlet {
+@WebServlet("/updateDoctor")
+public class UpdateDoctor extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,17 +25,18 @@ public class AddDoctor extends HttpServlet {
 			String email=req.getParameter("email");
 			String mobno=req.getParameter("mobno");
 			String password=req.getParameter("password");
+			int id=Integer.parseInt(req.getParameter("id"));
 			
-			Doctor d=new Doctor(fullName,dob,qualification,spec,email,mobno,password);
+			Doctor d=new Doctor(id,fullName,dob,qualification,spec,email,mobno,password);
 			DoctorDao dao= new DoctorDao(DBConnect.getConn());
 			HttpSession session=req.getSession();
-			if(dao.registerDoctor(d))
+			if(dao.updateDoctor(d))
 			{
-				session.setAttribute("succMsg", "Doctor Added Succesfully");
-			    resp.sendRedirect("admin/doctor.jsp");
+				session.setAttribute("succMsg", "Doctor update succesfully");
+			    resp.sendRedirect("admin/view_doctor.jsp");
 			}else {
 				session.setAttribute("errorMsg", "Something wrong on server");
-			    resp.sendRedirect("admin/doctor.jsp");
+			    resp.sendRedirect("admin/view_doctor.jsp");
 			}
 			
 			
