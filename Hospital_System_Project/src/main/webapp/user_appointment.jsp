@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ page import="com.dao.SpecialistDao, com.db.DBConnect, com.entity.Specalist, java.util.List" %>
+    <%@ page import="com.dao.DoctorDao, com.db.DBConnect, com.entity.Doctor, java.util.List" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,8 +47,8 @@ box-shadow:0 0 8px 0 rgba(0,0,0,0.3);
                     <p class="text-center text-danger fs-3">${errorMsg }</p>
                     <c:remove var="errorMsg" scope="session"/>
                     </c:if>
-                    <form class="row g-3" action="add_appoint" method="post">
-                    <input type="hidden" name="userId" value="${userObj.id }">
+                    <form class="row g-3" action="appAppointment" method="post">
+                    <input type="hidden" name="userid" value="${userObj.id }">
                     
                     <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Full Name</label><input
@@ -67,7 +70,7 @@ box-shadow:0 0 8px 0 rgba(0,0,0,0.3);
                     
                     <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Appointment Date</label><input
-                     type="date" class="form-control" required name="appoint_age">
+                     type="date" class="form-control" required name="appoint_date">
                     </div>
                     
                     
@@ -92,7 +95,20 @@ box-shadow:0 0 8px 0 rgba(0,0,0,0.3);
                     <label for="inputEmail4" class="form-label">Doctor</label><select
                      required  class="form-control" name="doct">
                      <option value="">--Select--</option>
-                     <option value="">Doctor Name</option>
+                     
+                     
+                     
+                     
+                     <%
+                     DoctorDao dao = new DoctorDao(DBConnect.getConn());
+                     List<Doctor> list = dao.getAllDoctor(); 
+                     for (Doctor d : list) {
+                 %>
+                     <option value="<%= d.getId() %>"><%= d.getFullName() %> (<%= d.getSpecialist() %>)</option>
+                 <%
+                     }
+                 %>
+
                      </select>
                     </div>
                     
@@ -103,7 +119,7 @@ box-shadow:0 0 8px 0 rgba(0,0,0,0.3);
                      
                     </div>
                     <c:if test="${ empty userObj }">
-                    <a href="ulogin.jsp" class="col-md-6 offset-md-3 btn btn-success">Submit</a>
+                    <a href="user_login.jsp" class="col-md-6 offset-md-3 btn btn-success">Submit</a>
                    
                     </c:if>
                     
