@@ -50,7 +50,7 @@
                         <th scope="col">Full Name</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Age</th>
-                        <th scope="col">Appoint Date</th>
+                        <th scope="col">Appointment Date</th>
                         <th scope="col">Diseases</th>
                         <th scope="col">Doctor Name</th>
                         <th scope="col">Status</th>
