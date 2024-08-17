@@ -3,6 +3,8 @@
 <%@ page import="com.dao.SpecialistDao, com.db.DBConnect, com.entity.Specalist, java.util.List" %>
 <%@ page import="com.dao.DoctorDao, com.db.DBConnect, com.entity.Doctor, java.util.List,com.entity.User" %>
 <%@ page import="com.dao.AppointmentDAO, com.entity.Appointment" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +35,9 @@
 </head>
 <body>
 <%@include file="component/navbar.jsp" %>
+<c:if test="${empty userObj }">
+<c:redirect url="user_login.jsp"></c:redirect>
+</c:if>
 
 <!-- Background Image Section -->
 <div class="container-fluid backImg p-5">

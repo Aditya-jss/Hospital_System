@@ -49,7 +49,7 @@
                             ${userObj.fullName}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Change Password</a></li>
+    <li><a class="dropdown-item" href="change_password.jsp">Change Password</a></li>
     <li><a class="dropdown-item" href="userLogout">Logout</a></li>
   </ul>
 </div>
